@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { v4 } from "uuid";
+import ReusableForm from "./ReusableForm";
 
 function NewInventoryForm(props){
   function handleNewInventoryFormSubmission(event){
@@ -14,22 +15,9 @@ function NewInventoryForm(props){
   }
   return(
     <React.Fragment>
-      <form onSubmit= {handleNewInventoryFormSubmission}>
-    <input
-    type ="text"
-    name= "flavor"
-    placeholder="Flavor Name" />
-    
-    <input
-      type="text"
-      name="price"
-      placeholder="Dollars per scoop"/>
-
-      <textarea
-      name= "flavorDescription"
-      placeholder="Flavor profile" />
-    <button type= 'submit'>YUM! SEND IT</button>
-    </form>
+    <ReusableForm 
+        formSubmissionHandler={handleNewInventoryFormSubmission}
+        buttonText="Add new Ice Cream :)" />
     </React.Fragment>
   );
 }
