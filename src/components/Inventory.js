@@ -1,16 +1,21 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-function Inventory(){
-  const flavor = "Strawberry";
-  const flavor2 = "Basil";
+function Inventory(props){
   return (
     <React.Fragment>
-      <h3> Summer strawberry fields</h3>
-      <h3>$1,000,000,000,000 per scoop</h3>
-      <h3> {flavor} and {flavor2}</h3>
-      <p><emp>All VEGAN, all the time ;)</emp></p>
+      <h3>{props.flavor} - {props.price}</h3>
+      <h3>{props.flavorDescription}</h3>
+      <p><em>All VEGAN, all the time ;)</em></p>
     </React.Fragment>
   );
 }
+
+Inventory.propTypes = {
+  flavor: PropTypes.string,
+  price: PropTypes.string,
+  flavorDescription: PropTypes.string
+};
+
 
 export default Inventory;
