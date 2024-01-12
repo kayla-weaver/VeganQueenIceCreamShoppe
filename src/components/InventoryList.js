@@ -7,9 +7,9 @@ function InventoryList(props){
   return (
    <React.Fragment>
     <hr />
-    {props.InventoryList.map((inventory, index)=>
+    {props.InventoryList.map((inventory)=>
     <Inventory 
-      whenInventoryClicked = { props.onInventorySelection}
+      whenInventoryClicked = { props.onInventorySelection }
       flavor = {inventory.flavor}
       price = {inventory.price}
       flavorDescription={inventory.flavorDescription}

@@ -38,11 +38,19 @@ class InventoryControl extends React.Component {
     this.setState({selectedInventory});
   }
 
+  handleDeletingInventory = (id) => {
+    const newMainInventoryList = this.state.mainInventoryList.filter(inventory => inventory.id !== id);
+    this.setState({
+      mainInventoryList: newMainInventoryList,
+      selectedInventory: null
+    });
+  }
+
 render(){
     let currentlyVisibleState = null;
     let buttonText = null;
     if (this.state.selectedDetail != null){
-      currentlyVisibleState = <InventoryDetail inventory = {this.state.selectedInventory}/>
+      currentlyVisibleState = <InventoryDetail inventory = {this.state.selectedInventory} onClickingDelete = {this.handleDeletingInventory}/>
       buttonText= 'Return to Ice Cream list :)';
     }
     else if (this.state.formVisibleOnPage){
