@@ -1,14 +1,12 @@
 import React from "react";
 import Header from "./Header";
-import InventoryList from "./InventoryList";
+import InventoryControl from "./TicketControl";
 
 function App(){
-  const flavor = "Strawberry";
-  const flavor2 = "Basil";
   return (
     <React.Fragment>
       <Header />
-      <InventoryList />
+      <InventoryControl />
     </React.Fragment>
   );
 }
