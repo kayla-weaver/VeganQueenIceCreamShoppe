@@ -1,21 +1,41 @@
 import React from "react";
 import Inventory from "./Inventory";
 
+const mainInventoryList = [
+  {
+    flavor: 'Strawb',
+    Price: "billion",
+    flavorDescription: "yummy yummy good"
+  },
+  {
+    flavor: 'Fwuit',
+    Price: "7billion",
+    flavorDescription: "yummy yummy gooooood"
+  },
+
+  {
+    flavor: 'flavy',
+    Price: "lots of billion",
+    flavorDescription: "yummy yummy too good"
+  }
+];
+
+
+
+
+
+
 function InventoryList(){
   return (
-    <React.Fragment>
-   <Inventory
-   flavor="strawberry fields"
-   price = "one billion per scoop"
-   flavorDescription = "basil and strawberry"
-   slogan = "All VEGAN, all the time ;)"/>
-
-   <Inventory
-   flavor="vanilla sunset"
-   price = "seven billion per scoop"
-   flavorDescription = "vanilla and stars"
-   slogan = "All VEGAN, all the time ;)"/>
-  </React.Fragment>
+   <React.Fragment>
+    <hr />
+    {mainInventoryList.map((inventory, index)=>
+    <Inventory flavor = {inventory.flavor}
+      price = {inventory.price}
+      flavorDescription={inventory.flavorDescription}
+      key={index}/>
+     )}
+   </React.Fragment>
   );
 }
 
