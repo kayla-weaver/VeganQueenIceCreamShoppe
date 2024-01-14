@@ -6,99 +6,122 @@ import EditInventoryForm from "./EditInventoryForm";
 import { v4 } from 'uuid';
 
 class InventoryControl extends React.Component {
-  constructor(props) {
+  
+  constructor(props){
     super(props);
     this.state = {
       formVisibleOnPage: false,
       selectedInventory: null,
       editing: false,
-      mainInventoryList: [
-        {
-          flavor: "rocky road",
-          price: 7,
-          flavorDescription: "chunks off asphalt that break your teeth",
-          id: v4()
-        }
-      ],
+      mainInventoryList: []
     };
   }
 
   handleClick = () => {
-    if (this.state.selectedInventory !== null) {
+    if (this.state.selectedInventory != null) {
       this.setState({
         formVisibleOnPage: false,
         selectedInventory: null,
-        editing: false,
+        editing: false
       });
     } else {
-      this.setState((prevState) => ({
+      this.setState(prevState => ({
         formVisibleOnPage: !prevState.formVisibleOnPage,
       }));
     }
-  };
+  }
 
   handleAddingNewInventoryToList = (newInventory) => {
     if (!newInventory.flavor || !newInventory.price || !newInventory.flavorDescription) {
       alert("Please fill in all fields before submitting.");
       return;
     }
+
+    const newInventoryItem = {
+      ...newInventory,
+      quantity: 0,
+      burlap: 0,
+      id: v4(),
+    };
+  
     this.setState((prevState) => ({
-      mainInventoryList: [...prevState.mainInventoryList, newInventory],
+      mainInventoryList: [...prevState.mainInventoryList, newInventoryItem],
       formVisibleOnPage: false,
     }));
   };
-
+  
   handleChangingSelectedInventory = (id) => {
-    const selectedInventory = this.state.mainInventoryList.find((inventory) => inventory.id === id);
-    this.setState({ selectedInventory: selectedInventory });
-  };
-
-  handleDeletingInventory = (id) => {
-    const newMainInventoryList = this.state.mainInventoryList.filter((inventory) => inventory.id !== id);
-    this.setState({
-      mainInventoryList: newMainInventoryList,
-      selectedInventory: null,
+    const selectedInventory = 
+    this.state.mainInventoryList.filter(Inventory => Inventory.id === id)[0];
+    this.setState({selectedInventory: selectedInventory
     });
-  };
+  }
 
   handleEditClick = () => {
-    console.log("handleEditClick reached!");
-    this.setState({ editing: true });
-  };
+    this.setState({editing: true});
+  }
 
-  handleEditingInventoryInList = (inventoryToEdit) => {
+  handleEditingInventoryInList = (InventoryToEdit) => {
     const editedMainInventoryList = this.state.mainInventoryList
-      .filter((inventory) => inventory.id !== this.state.selectedInventory.id)
-      .concat(inventoryToEdit);
+      .filter((Inventory) => Inventory.id !== this.state.selectedInventory.id)
+      .concat(InventoryToEdit);
     this.setState({
-      mainInventoryList: editedMainInventoryList,
-      editing: false,
-      selectedInventory: null,
+        mainInventoryList: editedMainInventoryList,
+        editing: false,
+        selectedInventory: null
     });
+  }
+
+  handleDeletingInventory = (id) => {
+    const newMainInventoryList = this.state.mainInventoryList.filter(Inventory => Inventory.id !== id);
+    this.setState({
+      mainInventoryList: newMainInventoryList,
+      selectedInventory: null
+    });
+  }
+
+  handleSellingInventory = () => {
+    const { selectedInventory, mainInventoryList } = this.state;
+    if (selectedInventory.available > 0) {
+      const updatedInventory = {
+        ...selectedInventory,
+        available: selectedInventory.available - 1,
+      };
+  
+      const updatedMainInventoryList = mainInventoryList.map((Inventory) =>
+        Inventory.id === selectedInventory.id ? updatedInventory : Inventory
+      );
+  
+      this.setState({
+        selectedInventory: updatedInventory,
+        mainInventoryList: updatedMainInventoryList,
+      });
+    }
   };
 
   render() {
     let currentlyVisibleState = null;
     let buttonText = null;
     if (this.state.editing) {
-      currentlyVisibleState = <EditInventoryForm ticket={this.state.selectedInventory} />;
+      currentlyVisibleState = <EditInventoryForm 
+      inventory={this.state.selectedInventory}
+      onEditInventory={this.handleEditingInventoryInList} />;
       buttonText = "Return to Ice Cream List";
     } else if (this.state.selectedInventory !== null) {
-      currentlyVisibleState = (
-        <InventoryDetail
-          inventory={this.state.selectedInventory}
-          onClickingDelete={this.handleDeletingInventory}
-          onClickingEdit={this.handleEditClick}
-        />
-      );
+      currentlyVisibleState = <InventoryDetail
+      inventory={this.state.selectedInventory}
+      onClickingDelete={this.handleDeletingInventory}
+      onClickingEdit={this.handleEditClick}
+      onClickingSell={this.handleSellingInventory}/>
       buttonText = 'Return to Ice Cream list :)';
     } else if (this.state.formVisibleOnPage) {
-      currentlyVisibleState = <NewInventoryForm onNewInventoryCreation={this.handleAddingNewInventoryToList} />;
+      currentlyVisibleState = <NewInventoryForm 
+      onNewInventoryCreation={this.handleAddingNewInventoryToList} />;
       buttonText = "Return to Ice Cream List!";
     } else {
-      currentlyVisibleState = (
-        <InventoryList InventoryList={this.state.mainInventoryList} onNewInventorySelection={this.handleChangingSelectedInventory} />
-      );
+      currentlyVisibleState = 
+        <InventoryList InventoryList={this.state.mainInventoryList} 
+        onInventorySelection={this.handleChangingSelectedInventory} />
       buttonText = "Add Ice Cream :)";
     }
 
