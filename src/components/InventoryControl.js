@@ -13,7 +13,29 @@ class InventoryControl extends React.Component {
       formVisibleOnPage: false,
       selectedInventory: null,
       editing: false,
-      mainInventoryList: []
+      mainInventoryList: [
+        {
+          flavor: "Strawberry basil Fields",
+        price: "$17 billion per scoop",
+        flavorDescription: "It's like a spoonful of summer when you taste the sweet strawberry ice cream mixed with crystalized basil pieces.",
+        available: 100,
+        id: v4()
+        },
+        {
+          flavor: "Deluxe Triple brownie",
+        price: "$444 billion per scoop",
+        flavorDescription: "For the special girlie in my life that loves to indulge on chocolate. Rich chocolate ice cream with chunks of fudgy brownies and swirled with decadent fudge ribbons",
+        available: 100,
+        id: v4()
+        },
+        {
+          flavor: "Hot dogs and Macaroni",
+        price: "$7 billion per scoop",
+        flavorDescription: "Yup! You can't not try it!! The smooth hot dog flavored ice cream with chunks of creamy macaroni will send you back to your childhood. Get it while you can! This one goes fast!!",
+        available: 100,
+        id: v4()
+        }
+      ]
     };
   }
 
@@ -102,12 +124,13 @@ class InventoryControl extends React.Component {
   render() {
     let currentlyVisibleState = null;
     let buttonText = null;
+
     if (this.state.editing) {
       currentlyVisibleState = <EditInventoryForm 
       inventory={this.state.selectedInventory}
       onEditInventory={this.handleEditingInventoryInList} />;
       buttonText = "Return to Ice Cream List";
-    } else if (this.state.selectedInventory !== null) {
+    } else if (this.state.selectedInventory != null) {
       currentlyVisibleState = <InventoryDetail
       inventory={this.state.selectedInventory}
       onClickingDelete={this.handleDeletingInventory}

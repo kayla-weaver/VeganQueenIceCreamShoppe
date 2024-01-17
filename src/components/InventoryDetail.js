@@ -6,10 +6,14 @@ function InventoryDetail(props){
 
   return(
     <React.Fragment>
-      <h1> Inventory Detail</h1>
-      <h3>{inventory.flavor} - { inventory.price} - {inventory.flavorDescription}</h3>
+      <h3> Ice Cream Inventory Detail</h3>
+      <h1>{inventory.flavor} </h1>
+      <p>{ inventory.price}</p>
+      <p>{inventory.flavorDescription}</p>
+      <p>{inventory.available} scoops</p>
       <p><em>All VEGAN, all the time</em></p>
       <button onClick={ props.onClickingEdit }>Update Ice Cream</button>
+      <button onClick= { props.onClickingSell }> Scoop </button>
       <button onClick={() => onClickingDelete (inventory.id)}>All gone</button>
       <hr/>
     </React.Fragment>
@@ -19,7 +23,8 @@ function InventoryDetail(props){
 InventoryDetail.propTypes ={
   inventory: PropTypes.object,
   onClickingDelete: PropTypes.func,
-  onClickingEdit: PropTypes.func
+  onClickingEdit: PropTypes.func,
+  onClickingSell: PropTypes.func
 };
 
 export default InventoryDetail;

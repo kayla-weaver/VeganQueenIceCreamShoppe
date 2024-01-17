@@ -10,6 +10,7 @@ function EditInventoryForm (props) {
     props.onEditInventory({
       flavor: event.target.flavor.value,
       price: parseFloat (event.target.price.value),
+      available: parseFloat(event.target.available.value),
       flavorDescription: event.target.flavorDescription.value,
       id: inventory.id
     })

@@ -16,6 +16,11 @@ function ReusableForm(props) {
       name="price"
       placeholder="Dollars per scoop"/>
 
+<input
+      type="text"
+      name="available"
+      placeholder="Scoops available"/>
+
       <textarea
       name= "flavorDescription"
       placeholder="Flavor profile" />

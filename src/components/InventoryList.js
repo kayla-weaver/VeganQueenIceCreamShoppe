@@ -13,6 +13,7 @@ function InventoryList(props){
       flavor = {inventory.flavor}
       price = {inventory.price}
       flavorDescription={inventory.flavorDescription}
+      available = {inventory.available}
       id= {inventory.id}
       key={inventory.id}/>
      )}
