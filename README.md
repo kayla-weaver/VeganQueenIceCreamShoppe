@@ -22,3 +22,6 @@ An applicationed used to track the inventory in my fully vegan ice creamery.
 
 **MIT License**
 Copyright (c) 2024 Kayla Weaver :)
+
+
+
