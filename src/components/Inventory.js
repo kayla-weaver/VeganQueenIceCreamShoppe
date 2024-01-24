@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 
 function Inventory(props){
-  console.log(props);
   return (
     <React.Fragment>
       <div onClick = {() => props.whenInventoryClicked(props.id)}>
@@ -23,7 +22,7 @@ Inventory.propTypes  = {
   price: PropTypes.string,
   flavorDescription: PropTypes.string,
   id: PropTypes.string,
-  available: PropTypes.string,
+  available: PropTypes.number,
   whenInventoryClicked: PropTypes.func
 }
 

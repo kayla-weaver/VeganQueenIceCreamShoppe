@@ -7,7 +7,7 @@ function Header(){
     <h1>Vegan Queen Ice Cream!</h1>
     <h4>For the queens that give a d*mn about our planet and want  a sweet, cold, and creamy treat!</h4>
     < hr />
-    <img src={icecreamImage} alt= "An image of ice cream with a cute little heart on top" class="medium"/>
+    <img src={icecreamImage} alt= "An image of ice cream with a cute little heart on top" className="medium"/>
     </React.Fragment>
   );
 }
